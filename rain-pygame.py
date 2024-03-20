@@ -2,34 +2,37 @@ import pygame
 import random
 
 class RainDrops(pygame.sprite.Sprite):
-	def __init__(self, pos_x, pos_y, size_x, size_y, speed):
+	def __init__(self, width, height, size_x, size_y):
 		super().__init__()
 		self.image = pygame.Surface((size_x, size_y))
-		self.image.fill((54, 125, 201)) 
+		self.image.fill((54, 125, 201))
 		self.rect = self.image.get_rect()
-		self.rect.x = pos_x
-		self.rect.y = pos_y
-		self.speed = speed
+		self.rect.x = random.randint(0, width)
+		self.rect.y = random.randint(0, height)
+		self.speed = random.uniform(3,5)
 
 	def update(self):
 		self.rect.y += self.speed
-		if self.rect.y >= 350:
+		self.rect.x += 1.2
+		if self.rect.y >= 400:
 			self.rect.y = 0
+		if self.rect.x >= 600:
+			self.rect.x = 0
 
 def main():
 	pygame.init()
 
-	width = 500
-	height = 350
+	width = 600
+	height = 400
 	screen = pygame.display.set_mode((width,height))
 
 	clock = pygame.time.Clock()
 	rain_sound = 'rain.wav'
 
-	rain_drops = pygame.sprite.Group()
+	raindrops = pygame.sprite.Group()
 
-	for i in range(500):
-		rain_drops.add(RainDrops(random.randint(0, width), random.randint(0, height), 2, 8, 5))
+	for i in range(600):
+		raindrops.add(RainDrops(width, height, 2, 8))
 
 	pygame.mixer.music.load(rain_sound)
 	pygame.mixer.music.play(-1)
@@ -41,16 +44,13 @@ def main():
 			if event.type == pygame.QUIT: 
 				run = False
 		
-		rain_drops.update()
+		raindrops.update()
 
 		screen.fill((0, 0, 0))
-		rain_drops.draw(screen)
+		raindrops.draw(screen)
 		
 		pygame.display.flip()
 		clock.tick(60)
 
 if __name__ == "__main__":
     main()
-
-
-
