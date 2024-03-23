@@ -1,8 +1,8 @@
 <h1>RainDrops</h1>
 
 RainDrops is a Python program created using the Pygame library, designed to simulate a rain experience 
-on your computer screen. As the program runs, blue particles cascade down the screen, mimicking the appearance of
-raindrops, accompanied by a gentle rain sound in the background.
+on your computer screen. As the program runs, blue particles cascade down the screen, simulating the appearance of
+raindrops, with a gentle rain sound in the background. 
 
 <h2>Usage</h2>
 
